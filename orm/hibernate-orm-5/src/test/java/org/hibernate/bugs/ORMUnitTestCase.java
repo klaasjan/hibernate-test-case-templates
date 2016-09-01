@@ -37,6 +37,8 @@ public class ORMUnitTestCase extends BaseCoreFunctionalTestCase {
 	@Override
 	protected Class[] getAnnotatedClasses() {
 		return new Class[] {
+				MixedCacheRegion.class,
+				MixedCacheRegionListElement.class
 //				Foo.class,
 //				Bar.class
 		};
@@ -67,13 +69,17 @@ public class ORMUnitTestCase extends BaseCoreFunctionalTestCase {
 	}
 
 	// Add your tests, using standard JUnit.
+	
+
 	@Test
-	public void hhh123Test() throws Exception {
-		// BaseCoreFunctionalTestCase automatically creates the SessionFactory and provides the Session.
+	public void mixedTest() throws Exception {
 		Session s = openSession();
-		Transaction tx = s.beginTransaction();
-		// Do stuff...
-		tx.commit();
+		//Transaction tx = s.beginTransaction();
+
+		MixedCacheRegion mixedCacheRegionEntity = new MixedCacheRegion();
+		s.beginTransaction();
+		s.save(mixedCacheRegionEntity);
+		//tx.commit();
 		s.close();
 	}
 }
